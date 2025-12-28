@@ -6,3 +6,5 @@ export async function POST (request: Request) {
     console.log(prompt)
     return NextResponse.json({message: "Hello World"})
 }
+
+
