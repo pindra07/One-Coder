@@ -16,5 +16,6 @@ export async function POST(request: Request) {
     ],
     stream: true
   });
-  return NextResponse.json({ message: "Hello World" });
+  console.log(response)
+  return NextResponse.json({ message: response });
 }
