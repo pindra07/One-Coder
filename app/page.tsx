@@ -14,7 +14,7 @@ export default function Home() {
   }
   return (
     <div className="mx-auto max-w-5xl mt-20 space-y-4">
-      <h1 className="font-bold text-3xl">LLama Coder</h1>
+      <h1 className="font-bold text-3xl">One Coder</h1>
       <pre>Generate landing page with one click...</pre>
       <form onSubmit={generateCode}>
       <input
@@ -24,6 +24,7 @@ export default function Home() {
         placeholder="put in your prompt"
         className="border p-2 rounded-md"
       />
+      <button className="text-white bg-black m-3 p-2 rounded-lg cursor-pointer ">Submit</button>
       </form>
     </div>
   );

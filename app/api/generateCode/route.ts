@@ -1,21 +1,21 @@
 import { NextResponse } from "next/server";
-import OpenAI from "openai";
+import { GoogleGenAI } from "@google/genai";
 
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
-});
+console.log(process.env.OPENAI_API_kEY)
+const ai = new GoogleGenAI({apiKey: process.env.GEMINI_API_KEY})
 
 export async function POST(request: Request) {
   const { prompt } = await request.json();
   console.log(prompt);
-  const response = await openai.chat.completions.create({
-    model: "gpt-4",
-    messages: [
-      { role: "system", content: "You are a react developer" },
-      { role: "user", content: prompt },
-    ],
-    stream: true
-  });
-  console.log(response)
-  return NextResponse.json({ message: response });
+  const response = await ai.models.generateContentStream({
+    model: "gemini-3-flash-preview",
+    contents: "You're a react developer",
+    config: {
+        systemInstruction: "You are a react developer write only code for react"
+    }
+  })
+  for await (const chunk of response) {
+    console.log(chunk.text);
+    return NextResponse.json(chunk.text)
+  }
 }
