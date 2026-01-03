@@ -13,6 +13,7 @@ pnpm dev
 # or
 bun dev
 ```
+And then add your Gemini API key to `.env.local` file to root of the directory.
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
