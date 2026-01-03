@@ -28,7 +28,7 @@ export default function Home() {
       const chunk = decoder.decode(value, { stream: true });
       setGeneratedCode((prev) => prev + chunk);
     }
-    console.log(generatedCode)
+    console.log(generatedCode);
   }
   return (
     <div className="mx-auto max-w-5xl mt-20 space-y-4">
@@ -46,13 +46,32 @@ export default function Home() {
           Submit
         </button>
       </form>
-      <Sandpack
+     {generatedCode && <Sandpack
         template="react-ts"
         files={{
           "/App.tsx": generatedCode,
-          
+          "/public/index.html": `
+          <!DOCTYPE html>
+          <html lang="en">
+            <head>
+              <meta charset="UTF-8">
+              <meta name="viewport" content="width=device-width, initial-scale=1.0">
+              <title>Document</title>
+              <script src="https://cdn.tailwindcss.com"></script>
+            </head>
+            <body>
+            <div id="root"></div>
+            </body>
+          </html>
+          `,
         }}
-      />
+        options={{
+          externalResources: [
+            "https://unpkg.com/@tailwindcss/ui/dist/tailwind-ui.min.css"
+          ],
+          editorHeight: "80vh",
+        }}
+      />}
     </div>
   );
 }
